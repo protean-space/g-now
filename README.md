@@ -21,3 +21,12 @@ GO_ENV=dev go run migrate/migrate.go
 ```sh
 GO_ENV=dev go run db/seed/seed.go
 ```
+
+### サーバー起動
+
+```sh
+cd backend
+GO_ENV=dev go run main.go
+```
+
+http://localhost:8080/category
