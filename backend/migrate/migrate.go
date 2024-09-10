@@ -14,11 +14,7 @@ func main() {
 		panic(err)
 	}
 	defer db.CloseDB(dbConn, err)
-	if err != nil {
-		slog.Error("fail close db connect.")
-		panic(err)
-	}
 
-	dbConn.AutoMigrate(&model.Article{}, &model.Category{}, &model.ArticleCategoryMap{})
+	dbConn.AutoMigrate(&model.Article{}, &model.Category{}, &model.ArticleCategoryMap{}, &model.Tag{})
 	slog.Info("Successfully Migrated.")
 }
