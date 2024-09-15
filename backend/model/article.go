@@ -4,6 +4,7 @@ import "time"
 
 type Article struct {
 	ID                uint   `gorm:"primaryKey"`
+	UID               string `gorm:"not null;uniqueIndex"`
 	Title             string `gorm:"not null"`
 	Contents          string `gorm:"not null"`
 	ArticleUrl        string
