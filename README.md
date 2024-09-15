@@ -31,8 +31,16 @@ GO_ENV=dev go run main.go
 
 http://localhost:8080/categories
 
-### DBログイン
+### 参考
+
+#### DBログイン
 
 ```sh
 psql -U user -d g-now
 ```
+
+#### ER図
+
+拡張機能：https://marketplace.visualstudio.com/items?itemName=hediet.vscode-drawio
+
+[ER図](er.drawio)
