@@ -29,4 +29,10 @@ cd backend
 GO_ENV=dev go run main.go
 ```
 
-http://localhost:8080/category
+http://localhost:8080/categories
+
+### DBログイン
+
+```sh
+psql -U user -d g-now
+```
