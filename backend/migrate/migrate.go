@@ -15,6 +15,6 @@ func main() {
 	}
 	defer db.CloseDB(dbConn, err)
 
-	dbConn.AutoMigrate(&model.Article{}, &model.Category{}, &model.ArticleCategoryMap{}, &model.Tag{})
+	dbConn.AutoMigrate(&model.Article{}, &model.Category{}, &model.ArticleCategoryMap{}, &model.Tag{}, &model.ArticleTagMap{})
 	slog.Info("Successfully Migrated.")
 }

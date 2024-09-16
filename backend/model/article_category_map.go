@@ -3,7 +3,7 @@ package model
 type ArticleCategoryMap struct {
 	ID         uint     `gorm:"primaryKey"`
 	Article    Article  `gorm:"not null;foreignKey:ArticleId"`
-	ArticleId  uint     `gorm:"not null"`
+	ArticleId  uint     `gorm:"not null;index:idx_article_category"`
 	Category   Category `gorm:"not null;foreignKey:CategoryId"`
-	CategoryId uint     `gorm:"not null"`
+	CategoryId uint     `gorm:"not null;index:idx_article_category"`
 }
