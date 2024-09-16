@@ -18,10 +18,16 @@ func main() {
 	}
 	defer db.CloseDB(dbConn, err)
 
+	// category
 	categoryRepository := repository.NewCategoryRepository(dbConn)
 	categoryUsecase := usecase.NewCategoryUsecase(categoryRepository)
 	categoryController := controller.NewCategoryController(categoryUsecase)
 
-	e := router.NewRouter(categoryController)
+	// article
+	articleRepository := repository.NewArticleRepository(dbConn)
+	articleUsecase := usecase.NewArticleUsecase(articleRepository)
+	articleController := controller.NewArticleController(articleUsecase)
+
+	e := router.NewRouter(categoryController, articleController)
 	e.Logger.Fatal(e.Start(":8080"))
 }

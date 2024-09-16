@@ -14,5 +14,6 @@ type Article struct {
 	SourcePublishedAt time.Time `json:"source_published_at" gorm:"not null"`
 	CreatedAt         time.Time
 	UpdatedAt         time.Time
-	Categories        []Category `gorm:"many2many:article_category_map"`
+	Categories        []Category `json:"categories" gorm:"many2many:article_category_maps"`
+	Tags              []Tag      `json:"tags" gorm:"many2many:article_tag_maps"`
 }
