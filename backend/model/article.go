@@ -3,7 +3,7 @@ package model
 import "time"
 
 type Article struct {
-	ID                uint   `json:"id" gorm:"primaryKey"`
+	ID                uint   `json:"id" gorm:"primaryKey;autoIncrement"`
 	UID               string `json:"uid" gorm:"not null;uniqueIndex"`
 	Title             string `json:"title" gorm:"not null"`
 	Contents          string `json:"contents" gorm:"not null"`

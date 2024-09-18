@@ -22,6 +22,19 @@ GO_ENV=dev go run migrate/migrate.go
 GO_ENV=dev go run db/seed/seed.go
 ```
 
+### GeminiAPIの設定
+
+- [APIキーの作成](https://ai.google.dev/gemini-api/docs/get-started/tutorial?lang=go&authuser=3&%3Bhl=ja&hl=ja#:~:text=%E3%82%82%E3%81%A7%E3%81%8D%E3%81%BE%E3%81%99%E3%80%82-,API%20%E3%82%AD%E3%83%BC%E3%82%92%E5%8F%96%E5%BE%97%E3%81%99%E3%82%8B,-API%20%E3%82%AD%E3%83%BC%E3%82%92)
+- .envファイルの作成
+  `cp .env.sample .env`
+- `.env`ファイルの`GEMINI_API_KEY`にAPIキーを記述
+
+### cronの手動実行
+
+```sh
+GO_ENV=dev go run cron/main.go
+```
+
 ### サーバー起動
 
 ```sh
@@ -29,7 +42,7 @@ cd backend
 GO_ENV=dev go run main.go
 ```
 
-http://localhost:8080/categories
+http://localhost:8080/articles
 
 <details>
 
