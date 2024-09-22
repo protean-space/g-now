@@ -1,0 +1,16 @@
+.header-frame{
+    width: 100vw;
+    margin: 0;
+    padding: "10px 40px 10px 40px";
+    position: "fixed";
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: #FFFFFF;
+    z-index: 1000;
+    text-align: center;
+}
+
+.header-title{
+    color:black
+}
