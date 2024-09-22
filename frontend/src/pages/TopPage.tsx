@@ -1,6 +1,6 @@
-// TopPage.tsx
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import './style.css'; // CSSファイルをインポート
 
 const TopPage: React.FC = () => {
   const navigate = useNavigate();
@@ -10,9 +10,9 @@ const TopPage: React.FC = () => {
   };
 
   return (
-    <div>
-      <h1>Welcome to g-now!!</h1>
-      <button onClick={goToSelection}>詳しくジャンルを見る</button>
+    <div className="toppage-container">
+      <h1 className="toppage-title">Welcome to g-now!!</h1>
+      <button onClick={goToSelection} className="goToSelection">詳しくジャンルを見る</button>
     </div>
   );
 }

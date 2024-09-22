@@ -40,7 +40,7 @@ const CategoryPage: React.FC = () => {
 
   return (
     <div>
-      {categoryData ? <h2>{categoryData}</h2> : <p>No Category Data</p>}
+      {categoryData ? <h3>{categoryData}</h3> : <p>No Category Data</p>}
       {graphData ? <Graph data={graphData} /> : <p>No Articles Data</p>}
     </div>
   );

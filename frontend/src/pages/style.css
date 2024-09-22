@@ -1,0 +1,45 @@
+.toppage-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; 
+    width: 100vw;
+    text-align: center; 
+}
+
+.toppage-title {
+    font-size: 2em;
+    margin-bottom: 20px;
+}
+
+.goToSelection {
+    padding: 10px 20px;
+    font-size: 1em;
+    cursor: pointer;
+}
+
+.select-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px; 
+    justify-items: center;
+    align-items: center;
+    padding: 20px;
+    width: 100vw;
+}
+
+.select-title {
+    grid-column: span 3;
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 2em;
+}
+
+.select-button {
+    padding: 0;
+    font-size: 1em;
+    cursor: pointer;
+    width: 200px;
+    height: 50px;
+}
