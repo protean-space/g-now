@@ -10,7 +10,7 @@ const AppRouter: React.FC = () => {
         <Route path="/" element={<TopPage />} />
         <Route path="/selection" element={<SelectionPage />} />
         {/* Dynamic route to handle different genres */}
-        <Route path="/category/:categoryName" element={<CategoryPage />} />
+        <Route path="/category/:id" element={<CategoryPage />} />
       </Routes>
     </Router>
   );
