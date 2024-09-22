@@ -2,6 +2,10 @@ package router
 
 import (
 	"g-now/controller"
+	"g-now/cron"
+	"g-now/db/seed"
+	"g-now/migrate"
+	"log/slog"
 	"net/http"
 	"os"
 
@@ -26,6 +30,22 @@ func NewRouter(cc controller.ICategoryController, ac controller.IArticleControll
 
 	e.GET("/categories", cc.GetAllCategories)
 	e.GET("/articles", ac.GetAllArticles)
+	e.GET("/migrate_and_seed", migrateAndSeed)
+	e.GET("/fetch_news", fetchNews)
 
 	return e
+}
+
+func migrateAndSeed(c echo.Context) error {
+	migrate.Run()
+	slog.Info("finish migrate.")
+	seed.Run()
+	slog.Info("finish seed.")
+	return nil
+}
+
+func fetchNews(c echo.Context) error {
+	cron.FetchNews()
+	slog.Info("finish fetch Google News.")
+	return nil
 }

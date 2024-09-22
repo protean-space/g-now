@@ -1,4 +1,4 @@
-package main
+package migrate
 
 import (
 	"g-now/db"
@@ -6,7 +6,7 @@ import (
 	"log/slog"
 )
 
-func main() {
+func Run() {
 	var err error
 	dbConn, err := db.NewDB()
 	if err != nil {
