@@ -13,9 +13,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/google/generative-ai-go/genai"
+	"cloud.google.com/go/vertexai/genai"
 	"github.com/joho/godotenv"
-	"google.golang.org/api/option"
 )
 
 type RSS struct {
@@ -72,7 +71,7 @@ func FetchNews() {
 
 	// Geminiを初期化
 	ctx := context.Background()
-	client, err := genai.NewClient(ctx, option.WithAPIKey(os.Getenv("GEMINI_API_KEY")))
+	client, err := genai.NewClient(ctx, os.Getenv("PROJECT_ID"), os.Getenv("REGION"))
 	if err != nil {
 		slog.Error("error: connect Gemini.")
 		slog.Error(err.Error())
@@ -87,7 +86,8 @@ func FetchNews() {
 	}
 	defer db.CloseDB(dbConn, err)
 
-	genModel := client.GenerativeModel("gemini-1.5-flash")
+	// genModel := client.GenerativeModel("gemini-1.5-flash")
+	genModel := client.GenerativeModel("gemini-1.0-pro")
 	categorizePrompt := "以下のニュースタイトルを、次のcategory: の中から1つに分類分けしてください。出力は結果の1単語だけを表示してください。category: [%s]。\nニュースタイトル: %s"
 	summarizePrompt := "以下のXMLが述べていることを300字以内で要約して出力してください。出力は要約内容だけを表示してください。\nXML: %s"
 	taggingPrompt := "以下のニュースタイトルから、カテゴリを3つ以内で作成してください。カテゴリは,区切りの結果だけを出力してください。\nニュースタイトル: %s"
