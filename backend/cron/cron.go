@@ -1,4 +1,4 @@
-package main
+package cron
 
 import (
 	"context"
@@ -37,7 +37,7 @@ type Item struct {
 	Description string `xml:"description"`
 }
 
-func main() {
+func FetchNews() {
 	var categoryMaster = []string{"政治", "ビジネス", "テクノロジー", "エンタメ", "スポーツ", "天気"}
 	var err error
 
@@ -74,6 +74,7 @@ func main() {
 	ctx := context.Background()
 	client, err := genai.NewClient(ctx, option.WithAPIKey(os.Getenv("GEMINI_API_KEY")))
 	if err != nil {
+		slog.Error("error: connect Gemini.")
 		slog.Error(err.Error())
 	}
 	defer client.Close()
@@ -90,6 +91,9 @@ func main() {
 	categorizePrompt := "以下のニュースタイトルを、次のcategory: の中から1つに分類分けしてください。出力は結果の1単語だけを表示してください。category: [%s]。\nニュースタイトル: %s"
 	summarizePrompt := "以下のXMLが述べていることを300字以内で要約して出力してください。出力は要約内容だけを表示してください。\nXML: %s"
 	taggingPrompt := "以下のニュースタイトルから、カテゴリを3つ以内で作成してください。カテゴリは,区切りの結果だけを出力してください。\nニュースタイトル: %s"
+
+	slog.Info("start fetch google news...")
+	slog.Info(os.Getenv("GEMINI_API_KEY"))
 
 	for index, item := range rss.Channel.Items {
 		// 5件まで作成
@@ -111,8 +115,10 @@ func main() {
 		if err != nil {
 			slog.Error(err.Error())
 		}
-		generateCategory := categoryRes.Candidates[0].Content.Parts[0]
-		dbConn.Where("category_name = ?", strings.TrimSpace(fmt.Sprint(generateCategory))).First(&category)
+		if categoryRes != nil {
+			generateCategory := categoryRes.Candidates[0].Content.Parts[0]
+			dbConn.Where("category_name = ?", strings.TrimSpace(fmt.Sprint(generateCategory))).First(&category)
+		}
 
 		// コンテンツ
 		summaryRes, err := genModel.GenerateContent(ctx, genai.Text(fmt.Sprintf(summarizePrompt, item.Description)))
@@ -156,4 +162,5 @@ func main() {
 
 		slog.Info("Successfully created article. UID: " + item.GUID)
 	}
+	slog.Info("end fetch google news.")
 }
