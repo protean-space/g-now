@@ -13,7 +13,11 @@ import (
 	"github.com/labstack/echo/v4/middleware"
 )
 
-func NewRouter(cc controller.ICategoryController, ac controller.IArticleController) *echo.Echo {
+func NewRouter(
+	cc controller.ICategoryController,
+	ac controller.IArticleController,
+	acc controller.IArticlesByCategoryController,
+) *echo.Echo {
 	e := echo.New()
 	e.Use(middleware.CORSWithConfig(middleware.CORSConfig{
 		AllowOrigins:     []string{"http://localhost:5173", os.Getenv("FE_URL")},
@@ -30,6 +34,7 @@ func NewRouter(cc controller.ICategoryController, ac controller.IArticleControll
 
 	e.GET("/categories", cc.GetAllCategories)
 	e.GET("/articles", ac.GetAllArticles)
+	e.GET("/categories/:id/articles", acc.GetArticlesByCategory)
 	e.GET("/migrate_and_seed", migrateAndSeed)
 	e.GET("/fetch_news", fetchNews)
 

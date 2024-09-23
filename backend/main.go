@@ -28,6 +28,11 @@ func main() {
 	articleUsecase := usecase.NewArticleUsecase(articleRepository)
 	articleController := controller.NewArticleController(articleUsecase)
 
-	e := router.NewRouter(categoryController, articleController)
+	// articles by category
+	articlesByCategoryRepository := repository.NewArticlesByCategoryRepository(dbConn)
+	articlesByCategoryUsecase := usecase.NewArticlesByCategoryUsecase(articlesByCategoryRepository)
+	articlesByCategoryController := controller.NewArticlesByCategoryController(articlesByCategoryUsecase)
+
+	e := router.NewRouter(categoryController, articleController, articlesByCategoryController)
 	e.Logger.Fatal(e.Start(":8080"))
 }
