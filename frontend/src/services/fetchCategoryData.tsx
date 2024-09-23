@@ -1,3 +1,7 @@
+/**
+ * fetching all categories data
+ */
+
 export async function fetchCategoryData(categoryNum: string) {
   const apiUrl = "http://localhost:8080"
 
@@ -5,7 +9,6 @@ export async function fetchCategoryData(categoryNum: string) {
   const categoryNumber = Number(categoryNum)
 
   const response = await fetch(`${apiUrl}/categories`);
-  console.dir(response, {depth:null})
   if (!response.ok) {
     throw new Error('Failed to fetch data');
   }
