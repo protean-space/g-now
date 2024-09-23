@@ -17,6 +17,7 @@ func NewRouter(
 	cc controller.ICategoryController,
 	ac controller.IArticleController,
 	acc controller.IArticlesByCategoryController,
+	atc controller.IArticlesByTagController,
 ) *echo.Echo {
 	e := echo.New()
 	e.Use(middleware.CORSWithConfig(middleware.CORSConfig{
@@ -35,6 +36,7 @@ func NewRouter(
 	e.GET("/categories", cc.GetAllCategories)
 	e.GET("/articles", ac.GetAllArticles)
 	e.GET("/categories/:id/articles", acc.GetArticlesByCategory)
+	e.GET("/tags/:tagName/articles", atc.GetArticlesByTag)
 	e.GET("/migrate_and_seed", migrateAndSeed)
 	e.GET("/fetch_news", fetchNews)
 

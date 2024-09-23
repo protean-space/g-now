@@ -1,5 +1,6 @@
-const apiUrl = "http://localhost:8080";
-
+/**
+ * fetching articles data by a category
+ */
 interface Article {
   categories: Array<{ category_name: string }>;
   tags: Array<{ tag_name: string }>;
@@ -12,6 +13,7 @@ interface GraphData {
 
 // APIからデータを取得し、グラフ用データに変換する関数
 export async function fetchArticlesData(categoryNumber: string): Promise<GraphData> {
+  const apiUrl = "http://localhost:8080";
   try {
     const endpoint = `${apiUrl}/categories/${categoryNumber}/articles`
     const response = await fetch(endpoint);

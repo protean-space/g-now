@@ -8,9 +8,10 @@ interface GraphProps {
     nodes: Array<{ id: string }>;
     links: Array<{ source: string; target: string }>;
   };
+  onNodeClick: (nodeId: string) => void; // ノードクリック時のコールバック
 }
 
-const Graph: React.FC<GraphProps> = ({ data }) => {
+const Graph: React.FC<GraphProps> = ({ data, onNodeClick }) => {
   const graphRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -20,6 +21,12 @@ const Graph: React.FC<GraphProps> = ({ data }) => {
 
       // 動的に渡されたグラフデータを使用
       graph.graphData(data);
+
+      // ノードクリック時にイベント発火
+      graph.onNodeClick((node: any) => {
+        const nodeId = node.id;
+        onNodeClick(nodeId); // 親コンポーネントにクリックされたノードIDを通知
+      });
 
       // リンクのカスタマイズ
       graph.linkWidth((link: any) => link.value || 1.8);
