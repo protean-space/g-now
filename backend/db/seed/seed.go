@@ -1,4 +1,4 @@
-package main
+package seed
 
 import (
 	"g-now/db"
@@ -9,7 +9,7 @@ import (
 	"gorm.io/gorm/clause"
 )
 
-func main() {
+func Run() {
 	slog.Info("Start seeding.")
 
 	var err error
